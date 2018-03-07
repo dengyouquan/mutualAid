@@ -68,17 +68,13 @@
                                     <div >
                                         <div class="ui button"  th:onclick="'addVote('+${esDocument.esdocumentId}+',this)'">
                                             <span th:if="${esDocument.voteSize}!=0" th:text="${esDocument.voteSize}+' '" class="voteSize"></span>
-                                            <i th:if="${user.id}==${esDocument.voteId}" class="thumbs up icon"></i>
-                                            <i th:if="${user.id}!=${esDocument.voteId}" class="thumbs outline up icon"></i>
-                                            <span th:if="${user.id}!=${esDocument.voteId}">!=</span>
-                                            <span th:if="${user.id}==${esDocument.voteId}">==</span>
+                                            <i class="thumbs up icon"></i>
+                                            <i class="thumbs outline up icon"></i>
                                         </div>
                                         <div class="ui button" th:onclick="'addDownVote('+${esDocument.esdocumentId}+',this)'">
                                             <span th:if="${esDocument.downVoteSize}!=0" th:text="${esDocument.downVoteSize}+' '" class="downVoteSize"></span>
-                                            <i th:if="${user.id}==${esDocument.downVoteId}" class="thumbs down icon"></i>
-                                            <i th:if="${user.id}!=${esDocument.downVoteId}" class="thumbs outline down icon"></i>
-                                            <span th:if="${user.id}!=${esDocument.downVoteId}">!=</span>
-                                            <span th:if="${user.id}==${esDocument.downVoteId}">==</span>
+                                            <i class="thumbs down icon"></i>
+                                            <i class="thumbs outline down icon"></i>
                                         </div>
                                         <!--用button没有href属性-->
                                         <a class="ui icon button" th:href="${esDocument.downloadpath}">

@@ -251,8 +251,12 @@ public class DocumentController {
             }
         }
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user",user);
+        //if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+        if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")){
+            System.out.println(SecurityContextHolder.getContext().getAuthentication().getName()+" LOGGED IN");
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
 
         System.out.println(async?"/index :: #"+mode+"ContainerSysc":"/index");
         return (async?"/index::#"+mode+"ContainerSysc":"/index");
