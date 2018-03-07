@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximun-scale=1.0,user-scalable=0"/>
+    <title>用户登录</title>
+    <link rel="stylesheet" href="css/semantic.min.css"/>
+    <link rel="stylesheet" href="css/login.css"/>
+</head>
+
+<body>
+    <div class="ui container mainpage">
+        <div class="login">
+            <div class="header">
+                <div class="ui container center aligned ">
+                    <div class="ui  buttons ">
+                        <button class="ui positive button">登录</button>
+                        <div class="or"></div>
+                        <button class="ui  button">注册</button>
+                    </div>
+                </div>
+            </div>
+            <div class="content login">
+                <form class="ui form" method="post" th:action="@{/login}">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="username" placeholder="请输入用户名">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" placeholder="请输入密码">
+                        </div>
+                    </div>
+                    <div align="right" style="padding-right: 10%">
+                        <input class="ui item left" type="checkbox" name="remember-me"> 记住我
+                    </div>
+                    <div class="resetpassword" align="right">
+                        <a class="ui item right">忘记密码 </a>
+                    </div>
+                    <button class="ui blue massive submit button">登录</button>
+
+                    <div th:if="${loginError}" align="center">
+                        <p class="blog-label-error" th:text="${errorMsg}"></p>
+                    </div>
+                </form>
+
+            </div>
+            <div class="content register" hidden="hidden">
+                <form class="ui form">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input type="text" name="account" placeholder="请输入账号">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input type="text" name="username" placeholder="请输入用户名">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input type="password" name="password" placeholder="请输入密码">
+                            <i class="lock icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input type="password" name="repassword" placeholder="请再次输入密码">
+                            <i class="lock icon"></i>
+                        </div>
+                    </div>
+                    <button class="ui blue massive submit button">注册</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="resetpwd" hidden>
+            <h2 class="ui center aligned  header"> 密码找回 </h2>
+            <!--验证账户-->
+            <div class="content check">
+                <div class="ui form">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input type="text" name="username" placeholder="请输入您的账号">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui blue massive submit button">确认</div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script src="../../js/jquery-3.1.1.min.js"></script>
+<script src="../../js/semantic.min.js" charset="utf-8"></script>
+<script>
+    $(document).ready(function () {
+
+        $('.login .header button').on('click', function (e) {
+            $(this).addClass('positive').siblings().removeClass('positive')
+            if ($(this).text() == '登录') {
+            	clearfileds();
+                $('.login .register').hide('fast', function () {
+                    $('.login .login').show('slow', function () {
+                    });
+                });
+            } else {
+                clearfileds();
+                $('.login .login').hide('fast', function () {
+                    $('.login .register').show('slow', function () {
+                    });
+                });
+            }
+        });
+
+    	$('.mainpage .resetpwd .submit').click(function (event) {
+            if ($('.mainpage .resetpwd .check').is(":visible")) {
+                $('.resetpwd .check .form').form({
+                    inline: true,
+                    on: 'blur',
+                    fields: {
+                        username: {
+                            identifier: 'username',
+                            rules: [{
+                                type: 'empty',
+                                prompt: "请输入用户名"
+                            }]
+                        }
+                    },
+                    onSuccess: function (event, fields) {
+                        var $input = $('.resetpwd .check input');
+                        var formdata = $input.serialize();
+                        $.post('/in/checkexist', formdata, function (data, textStatus, xhr) {
+                            if (data.ok) {
+                                $('.resetpwd .verify :input[name="username"]').val($('.resetpwd .check :input[name="username"]').val());
+                                $('.resetpwd .verify :input[name="question"]').val(data.question)
+                                $.router('add', {
+                                    modal: {
+                                        hash: '#verify',
+                                        func: function () {
+                                            $('.mainpage .resetpwd .check').hide();
+                                            $('.mainpage .resetpwd .reset').hide();
+                                            $('.mainpage .resetpwd .verify').show();
+                                        }
+                                    }
+                                });
+                            } else if (data.msg == "none") {
+                                layer.msg("该用户不存在！", {
+                                    icon: 2,
+                                    time: 2000
+                                })
+                            } else {
+                                layer.msg("该用户未设置密保", {
+                                    icon: 2,
+                                    time: 2000
+                                })
+                            }
+                        });
+
+                    },
+                    onFailure: function (formErrors, fields) {
+                        console.log("验证失败！");
+                    }
+                }).form('validate form');
+
+            }
+        });
+
+    
+    	$('.mainpage .login .resetpassword a').click(function (event) {
+            $.router('add', {
+                modal: {
+                    hash: '#check',
+                    func: function () {
+                        $('.mainpage .login').hide();
+                        $('.mainpage .resetpwd').show();
+                        $('.mainpage .resetpwd .check').show();
+                        $('.mainpage .resetpwd .reset').hide();
+                        $('.mainpage .resetpwd .verify').hide();
+                    }
+                }
+            });
+        })
+
+    });
+    function clearfileds() {
+        $('input').val('');
+    }
+</script>

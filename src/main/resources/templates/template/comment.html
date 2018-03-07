@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+		<!-- Standard Meta -->
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<!-- Site Properties -->
+		<title>评论</title>
+	</head>
+
+	<body>
+		<!--content-->
+		<div class="ui comments" data-th-fragment="comment">
+			<div class="comment">
+				<a class="avatar">
+					<img src="/images/avatar/small/matt.jpg">
+				</a>
+				<div class="content">
+					<a class="author">Matt</a>
+					<div class="metadata">
+						<span class="date">今天下午 5:42</span>
+					</div>
+					<div class="text">太赞了！ </div>
+					<div class="actions">
+						<a class="reply">Reply</a>
+					</div>
+				</div>
+			</div>
+			<div class="comment">
+				<a class="avatar">
+					<img src="/images/avatar/small/elliot.jpg">
+				</a>
+				<div class="content">
+					<a class="author">Elliot Fu</a>
+					<div class="metadata">
+						<span class="date">昨天上午12:30</span>
+					</div>
+					<div class="text">
+						<p>這對我的研究是非常有用.謝謝!</p>
+					</div>
+					<div class="actions">
+						<a class="reply">Reply</a>
+					</div>
+				</div>
+				<div class="comments">
+					<div class="comment">
+						<a class="avatar">
+							<img src="/images/avatar/small/jenny.jpg">
+						</a>
+						<div class="content">
+							<a class="author">Jenny Hess</a>
+							<div class="metadata">
+								<span class="date">刚刚</span>
+							</div>
+							<div class="text">艾略特你永远是多么正确 :) </div>
+							<div class="actions">
+								<a class="reply">Reply</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="comment">
+				<a class="avatar">
+					<img src="/images/avatar/small/joe.jpg">
+				</a>
+				<div class="content">
+					<a class="author">Joe Henderson</a>
+					<div class="metadata">
+						<span class="date">5 天以前</span>
+					</div>
+					<div class="text">老兄，这太棒了。非常感谢。 </div>
+					<div class="actions">
+						<a class="reply">Reply</a>
+					</div>
+				</div>
+			</div>
+			<form class="ui reply form">
+				<div class="field">
+					<textarea></textarea>
+				</div>
+				<div class="ui blue labeled submit icon button"><i class="icon edit"></i> Add Reply </div>
+			</form>
+		</div>
+	</body>
+
+</html>

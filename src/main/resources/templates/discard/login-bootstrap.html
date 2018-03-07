@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+</head>
+    <body>
+    <div style="margin-top: 50px;margin-left: 30%;margin-right: 30%;">
+        <div class="content login">
+            <form class="ui form" method="post" th:action="@{/login}">
+                <h3 style="">登录</h3>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="username" placeholder="请输入用户名">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" placeholder="请输入密码">
+                    </div>
+                </div>
+                <div class="resetpassword" align="right">
+                    <a class="ui item right">忘记密码 </a>
+                </div>
+                <button class="ui blue massive submit button">登录</button>
+            </form>
+        </div>
+        <div class=" col-md-5" th:if="${loginError}">
+            <p class="blog-label-error" th:text="${errorMsg}"></p>
+        </div>
+    </div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+    </body>
+</html>

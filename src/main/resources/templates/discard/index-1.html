@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+	<head th:replace="~{fragments/head::head}">
+		<!-- Standard Meta -->
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- Site Properties -->
+		<title>互助平台</title>
+	</head>
+
+	<!--<body style="overflow: hidden">-->
+    <body>
+        <!--header-->
+        <div th:replace="~{fragments/header::header}"></div>
+		<!--content-->
+
+        <div class="ui grid">
+            <div class="three wide column">
+                <div class="ui card container" style="margin-top: 30%">
+                    <div class="content">
+                        <div class="ui one stackable cards">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="/images/avatar/large/elliot.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui center">
+                            <br>
+                            <div class="header">名称</div>
+                            <div>积分：220</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nine wide column">
+                <div class="ui main">
+                    <div class="ui card"  style="width: 100%;padding-bottom: 5%;padding-left: 5%;margin-top: 10%">
+                        <div class="content">
+                            <h3 class="ui center aligned header">资料条目</h3>
+                            <div class="ui three column doubling grid">
+                                <div class="column">
+                                    <a class="ui primary button">综合</a>
+                                </div>
+                                <div class="column">
+                                    <a class="ui button">最热</a>
+                                </div>
+                                <div class="column">
+                                    <a class="ui button">最新</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui items">
+                        <div class="item">
+                            <div class="image">
+                                <img src="images/empty.png">
+                            </div>
+                            <div class="content">
+                                <a class="header">标题</a>
+                                <div class="meta">
+                                    <span>Description</span>
+                                </div>
+                                <div class="description">
+                                    <p></p>
+                                </div>
+                                <div class="extra">Additional Details </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="image">
+                                <img src="images/empty.png">
+                            </div>
+                            <div class="content">
+                                <a class="header">标题</a>
+                                <div class="meta">
+                                    <span>Description</span>
+                                </div>
+                                <div class="description">
+                                    <p></p>
+                                </div>
+                                <div class="extra">Additional Details </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="ui card"  style="width: 100%;padding-bottom: 5%;padding-left: 5%;margin-bottom: 5%;">
+                        <div class="content">
+                            <h3 class="ui center aligned header">线下家教</h3>
+                            <div class="ui three column doubling grid">
+                                <div class="column">
+                                    <a class="ui primary button">综合</a>
+                                </div>
+                                <div class="column">
+                                    <a class="ui button">最热</a>
+                                </div>
+                                <div class="column">
+                                    <a class="ui button">最新</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui link cards">
+                            <div class="card">
+                                <div class="blurring dimmable image">
+                                    <div class="ui dimmer">
+                                        <div class="content">
+                                            <div class="center">
+                                                <div class="ui inverted button">Add Friend</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <img src="images/matthew.png">
+                                </div>
+                                <!--<div class="image">
+                                    <img src="images/matthew.png">
+                                </div>-->
+                                <div class="content">
+                                    <div class="header">Matt Giampietro</div>
+                                    <div class="meta">
+                                        <a>好友</a>
+                                    </div>
+                                    <div class="description">Matthew is an interior designer living in New York. </div>
+                                </div>
+                                <div class="extra content">
+                                    <span class="right floated">2013年加入 </span>
+                                    <span><i class="user icon"></i> 75 Friends </span>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="image">
+                                    <img src="images/molly.png">
+                                </div>
+                                <div class="content">
+                                    <div class="header">Molly</div>
+                                    <div class="meta">
+                                        <span class="date">Coworker</span>
+                                    </div>
+                                    <div class="description">Molly is a personal assistant living in Paris. </div>
+                                </div>
+                                <div class="extra content">
+                                    <span class="right floated">2011年加入 </span>
+                                    <span><i class="user icon"></i> 35 Friends </span>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="image">
+                                    <img src="images/elyse.png">
+                                </div>
+                                <div class="content">
+                                    <div class="header">Elyse</div>
+                                    <div class="meta">
+                                        <a>Coworker</a>
+                                    </div>
+                                    <div class="description">Elyse is a copywriter working in New York. </div>
+                                </div>
+                                <div class="extra content">
+                                    <span class="right floated">2014年加入 </span>
+                                    <span><i class="user icon"></i> 151 Friends </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column container">
+                <div class="ui card" style="margin-top: 20%">
+                    <div class="content">
+                        <div class="header">热门资料</div>
+                    </div>
+                    <div class="content">
+                        <div class="ui feed">
+                            <div class="event">
+                                <div class="content">
+                                    <a>计算机组成原理</a>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <a>经济学原理</a>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <a>哲学原理</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui card" style="margin-top: 20%">
+                    <div class="content">
+                        <div class="header">最新资料</div>
+                    </div>
+                    <div class="content">
+                        <div class="ui feed">
+                            <div class="event">
+                                <div class="content">
+                                    <a>高等数学</a>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <a>量子力学</a>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <a>java程序设计</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui card" style="margin-top: 20%">
+                    <div class="content">
+                        <div class="header">热门教师</div>
+                    </div>
+                    <div class="content">
+                        <div class="ui three stackable cards">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="/images/avatar/large/elliot.jpg">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="image">
+                                    <img src="/images/avatar/large/helen.jpg">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="image">
+                                    <img src="/images/avatar/large/jenny.jpg">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="image">
+                                    <img src="/images/avatar/large/veronika.jpg">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="image">
+                                    <img src="/images/avatar/large/steve.jpg">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="image">
+                                    <img src="/images/avatar/large/steve.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+		<!--footer-->
+		<div th:replace="~{/fragments/footer::footer}"></div>
+	</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<!--
+/*
+ * jQuery File Upload Plugin Demo
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ */
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head::head}">
+    <meta charset="utf-8">
+    <title>悬赏任务</title>
+    <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for jQuery. Supports cross-domain, chunked and resumable file uploads and client-side image resizing. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<!--header-->
+<div th:replace="~{fragments/header::header}"></div>
+<!--content-->
+<!--引入semantic，解决边框-->
+<div class="ui card center" style="margin-top: 10%;margin-left: 25%;margin-right: 25%;margin-bottom: 10%;width: 50%">
+    <div class="content">
+        <div class="header">悬赏任务</div>
+    </div>
+    <div class="content">
+        <form class="layui-form layui-form-pane" method="post" th:action="@{/rewardtask}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文档标题</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="title" lay-verify="required" placeholder="请输入文档标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">文档类型</label>
+                <div class="layui-input-block">
+                    <select name="type" lay-filter="aihao">
+                        <option value=""></option>
+                        <option value="computer" selected="">计算机</option>
+                        <option value="economics">经济学</option>
+                        <option value="english">外语</option>
+                        <option value="science">理学</option>
+                        <option value="engineering">工学</option>
+                        <option value="philosophy">哲学</option>
+                        <option value="lifesciences">生命科学</option>
+                        <option value="literature">文学</option>
+                        <option value="psychology">心理学</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">悬赏天数</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="days" lay-verify="required" placeholder="请输入悬赏天数" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">赏金</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="money" lay-verify="required" placeholder="请输入赏金" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">悬赏描述</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入悬赏描述" name="description" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <!--普通上传-->
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="imageupload">上传封面图片</button>
+                <div class="layui-upload-list">
+                    <input id="cover" name="cover" hidden/>
+                    <!--引入semantic，解决图片大小-->
+                    <div class="ui one stackable cards" style="margin-left: 30%;margin-right: 30%;width: 40%">
+                        <div class="card">
+                            <div class="image">
+                                <img class="layui-upload-img" id="image">
+                            </div>
+                        </div>
+                    </div>
+                    <p id="demoText"></p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="submitdocument">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--footer-->
+<div th:replace="~{/fragments/footer::footer}"></div>
+<script>
+    layui.use(['form','upload'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,$ = layui.jquery
+            ,upload = layui.upload;
+
+        //自定义验证规则
+        form.verify({
+            title: function(value){
+                if(value.length < 2){
+                    return '标题至少得2个字符啊';
+                }
+            }
+        });
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#imageupload'
+           // ,url: '/uploadfile'
+            ,url: 'http://www.dengyouquan.cn:8083/upload'
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#image').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                $("#cover").attr("value",res.data);
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

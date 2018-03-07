@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<!--<head th:replace="~{fragments/head::head}">semantic和 bootstrap冲突 图标组不正常
+但是bootstrap去掉后，引起整个框架的微变-->
+	<head>
+        <!-- Standard Meta -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <!--CSRF-->
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <!-- default header name is X-CSRF-TOKEN -->
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+        <title>Header</title>
+
+        <!--semantic.min-->
+        <link rel="stylesheet" href="../../css/semantic.min.css" th:href="@{/css/semantic.min.css}" />
+
+        <link rel="stylesheet" href="../../css/index.css" th:href="@{/css/index.css}" />
+        <!--bootstrap.min-->
+       <!-- <link rel="stylesheet" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />-->
+        <!--userspace-->
+        <link rel="stylesheet" href="layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+        <link rel="stylesheet" href="css/global.css" th:href="@{/css/global.css}">
+        <!--upload-->
+        <link rel="stylesheet" href="css/jquery-upload.css" th:href="@{/css/jquery-upload.css}">
+		<!-- Site Properties -->
+		<title>文档详情</title>
+	</head>
+	<body>
+
+		<!--header-->
+		<div th:replace="~{fragments/header::header}"></div>
+		<!--content-->
+        <div class="main container ui">
+            <div class="ui card center" style="margin-top: 10%;margin-left: 15%;margin-right: 15%;margin-bottom: 10%;width: 70%;">
+                <div class="content">
+                    <div class="header">文档详情</div>
+                </div>
+                <div class="content">
+                    <div th:if="${esDocument}!=null">
+                        <span hidden id="esDocumentId" th:text="${esDocument.esdocumentId}"></span>
+                        <div class="item">
+                            <div class="image">
+                                <img class="ui small image" src="/images/empty.png" th:src="${esDocument.cover}">
+                            </div>
+                            <div class="content">
+                                <a class="header" th:text="${esDocument.title}">标题</a>
+                                <div class="meta">
+                                    <span>Description</span>
+                                </div>
+                                <div class="description">
+                                    <p th:text="${esDocument.description}"></p>
+                                </div>
+                                <div class="extra">
+                                    <div class="extra">
+                                        <a th:src="${esDocument.filepath}"></a>
+                                    </div>
+                                    <!--图标组-->
+                                    <div >
+                                        <div class="ui animated button" tabindex="0">
+                                            <div class="hidden content">赞</div>
+                                            <div class="visible content">
+                                                128<i class="thumbs outline up icon"> </i>
+                                            </div>
+                                        </div>
+                                        <div class="ui vertical animated button" tabindex="0">
+                                            <div class="hidden content">踩</div>
+                                            <div class="visible content">
+                                                8<i class="thumbs outline down icon"></i>
+                                            </div>
+                                        </div>
+                                        <button class="ui icon button">
+                                            <i class="download icon"></i>
+                                        </button>
+                                        <button class="ui icon button">
+                                            <i class="fork icon"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${esDocument}==null">
+                        <div class="item">
+                            <div class="ui one stackable cards">
+                                <div class="card">
+                                    <div class="image">
+                                        <img src="/images/empty.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <a class="header">标题</a>
+                                <div class="meta">
+                                    <span>Description</span>
+                                </div>
+                                <div class="description">
+                                    <p></p>
+                                </div>
+                                <div class="extra">Additional Details </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui card center" style="margin-top: 10%;margin-left: 15%;margin-right: 15%;margin-bottom: 10%;width: 70%;">
+                <div class="content">
+                    <div class="header">相关资料</div>
+                </div>
+                <div class="content">
+                    <div class="ui items">
+                        <div class="item">
+                            <div class="image">
+                                <img src="/images/empty.png">
+                            </div>
+                            <div class="content">
+                                <a class="header" href="/documentdetail" th:href="@{/documentdetail}">标题</a>
+                                <div class="meta">
+                                    <span>Description</span>
+                                </div>
+                                <div class="description">
+                                    <p></p>
+                                </div>
+                                <div class="extra">Additional Details </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="image">
+                                <img src="/images/empty.png">
+                            </div>
+                            <div class="content">
+                                <a class="header" href="/documentdetail" th:href="@{/documentdetail}">标题</a>
+                                <div class="meta">
+                                    <span>Description</span>
+                                </div>
+                                <div class="description">
+                                    <p></p>
+                                </div>
+                                <div class="extra">Additional Details </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="ui card center"会让框在中间-->
+            <div class="ui card" style="margin-top: 10%;margin-left: 15%;margin-right: 15%;margin-bottom: 10%;width: 70%;">
+                <div class="content">
+                    <div class="header">评论详情</div>
+                </div>
+                <div class="content">
+                    <!--comment-->
+                    <div th:replace="~{/fragments/comment::comment}"></div>
+                </div>
+            </div>
+        </div>
+		<!--footer-->
+		<div th:replace="~{/fragments/footer::footer}"></div>
+	</body>
+
+</html>

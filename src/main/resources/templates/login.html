@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximun-scale=1.0,user-scalable=0"/>
+    <title>用户登录</title>
+    <link rel="stylesheet" href="css/semantic.min.css"/>
+    <link rel="stylesheet" href="css/login.css"/>
+</head>
+
+<body>
+    <div class="ui container mainpage">
+        <div class="login">
+            <div class="header">
+                <div class="ui container center aligned ">
+                    <div class="ui  buttons ">
+                        <button class="ui positive button">登录</button>
+                        <div class="or"></div>
+                        <button class="ui  button">注册</button>
+                    </div>
+                </div>
+            </div>
+            <div class="content login">
+                <form class="ui form" method="post" th:action="@{/login}">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input class="input" type="text" name="username" placeholder="请输入用户名">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" placeholder="请输入密码">
+                        </div>
+                    </div>
+                    <div align="center">
+                        <input  class="ui item left input" type="checkbox" name="remember-me">记住我
+                    </div>
+                    <div class="resetpassword" align="right">
+                        <a class="ui item right">忘记密码 </a>
+                    </div>
+                    <button class="ui blue massive submit button">登录</button>
+
+                    <div th:if="${loginError}" align="center">
+                        <!--<p class="blog-label-error" th:text="${errorMsg}"></p>-->
+                        <p class="blog-label-error" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
+                    </div>
+                    <!--<div th:if="${param.error}" align="center">
+                        <p class="blog-label-error" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
+                    </div>-->
+
+                </form>
+
+            </div>
+            <div class="content register" hidden="hidden">
+                <form class="ui form" th:action="@{/users/register}" method="post">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input class="input" type="text" name="username" placeholder="请输入账号">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input class="input" type="text" name="name" placeholder="请输入用户名">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input class="input" type="text" name="email" placeholder="请输入邮箱">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input class="input" type="password" name="password" placeholder="请输入密码">
+                            <i class="lock icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input class="input" type="password" name="repassword" placeholder="请再次输入密码">
+                            <i class="lock icon"></i>
+                        </div>
+                    </div>
+                    <!--<div class="field">
+                        <label for="authorities" class="col-form-label">角色</label>
+                        <select id="authorities" name="authorityId" class="form-control form-control-chosen" data-placeholder="请选择">
+                            <option value="1">管理员</option>
+                            <option value="2">用户</option>
+                        </select>
+                    </div>-->
+                    <button class="ui blue massive submit button">注册</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="resetpwd" hidden>
+            <h2 class="ui center aligned  header"> 密码找回 </h2>
+            <!--验证账户-->
+            <div class="content check">
+                <div class="ui form">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <input type="text" name="username" placeholder="请输入您的账号">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui blue massive submit button">确认</div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script src="../../js/jquery-3.1.1.min.js"></script>
+<script src="../../js/semantic.min.js" charset="utf-8"></script>
+<script>
+    $(document).ready(function () {
+
+        $('.login .header button').on('click', function (e) {
+            $(this).addClass('positive').siblings().removeClass('positive')
+            if ($(this).text() == '登录') {
+            	clearfileds();
+                $('.login .register').hide('fast', function () {
+                    $('.login .login').show('slow', function () {
+                    });
+                });
+            } else {
+                clearfileds();
+                $('.login .login').hide('fast', function () {
+                    $('.login .register').show('slow', function () {
+                    });
+                });
+            }
+        });
+    });
+    function clearfileds() {
+        $('.input').val('');
+    }
+</script>

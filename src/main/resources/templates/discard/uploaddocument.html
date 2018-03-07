@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<!--
+/*
+ * jQuery File Upload Plugin Demo
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ */
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="~{fragments/head::head}">
+		<meta charset="utf-8">
+		<title>jQuery File Upload Demo</title>
+		<meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for jQuery. Supports cross-domain, chunked and resumable file uploads and client-side image resizing. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<!--header-->
+		<div th:replace="~{fragments/header::header}"></div>
+		<!--content-->
+        <!--content-->
+        <div class="main container ui">
+            <div class="ui card center" style="margin-top: 10%;margin-left: 25%;margin-right: 25%;margin-bottom: 10%;width: 50%">
+                <div class="content">
+                    <div class="header">上传文档</div>
+                </div>
+                <div class="content">
+
+                    <form class="ui form segment" th:action="@{/upload/document}">
+                        <div class="field">
+                            <label>文档标题</label>
+                            <input placeholder="请输入标题" name="title" type="text">
+                        </div>
+                        <div class="field">
+                            <label>文档描述</label>
+                            <input placeholder="请输入描述" name="description" type="text">
+                        </div>
+                        <div class="field">
+                            <label>所属类型</label>
+                            <select name="type" class="ui fluid dropdown">
+                                <option value="">请选择类型</option>
+                                <option value="it">计算机</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>积分</label>
+                            <input placeholder="请输入积分" name="moneyReward" type="text">
+                        </div>
+
+
+                        <div class="ui card center" style="width: 100%">
+                            <div class="content">
+                                <div class="header">上传文档</div>
+                            </div>
+                            <div class="content">
+                                <div class="jquery-fileupload container main ui">
+                                    <div class="uploadBtn">
+                                        <input id="fileupload" type="file" name="cover" multiple />
+                                        <span>+选择文件</span>
+                                    </div>
+                                    <span class="tips"></span>
+                                    <div style="clear: both;"></div>
+                                    <!--文件-->
+                                    <table>
+                                        <tbody class="filesName">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui primary submit button">提交</div>
+                        <div class="ui reset button">重置</div>
+                        <div class="ui clear button">清空</div>
+                    </form>
+
+                    <div class="ui modal" align="center" style="width: 40%;height: 30%">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            Modal Title
+                        </div>
+                        <div class="content">
+                            是否删除？
+                        </div>
+                        <div class="actions">
+                            <div class="ui cancel  button">取消</div>
+                            <div class="ui approve button">确认</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--footer-->
+        <div th:replace="~{/fragments/footer::footer}"></div>
+
+        <script src="../../js/main-jquery-upload.js"  type="text/javascript"></script>
+	</body>
+</html>

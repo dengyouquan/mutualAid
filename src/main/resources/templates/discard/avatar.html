@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <style media="screen">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding: 100px 20%;
+            font-family: '微软雅黑';
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #app {
+            position: relative;
+            text-align: center;
+        }
+
+        .wrap {
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            display: block;
+            margin: 30px auto 10px auto;
+            width: 120px;
+            height: 40px;
+            font-size: 14px;
+            line-height: 40px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+
+        .avatar {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../css/index.css" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" href="../../css/semantic.min.css" th:href="@{/css/semantic.min.css}" />
+    <!-- Bootstrap CSS -->
+    <link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/global.css">
+</head>
+
+<body>
+<div id="app">
+    <div class="item">
+        <a class="btn" @click="toggleShow2">设置头像</a>
+        <img class="avatar" v-if="avatarUrl2" :src="avatarUrl2" v-show="true" style="display: none;">
+        <my-upload url="https://httpbin.org/post"
+                   field="avatar2"
+                   key="0"
+                   lang-type="en"
+                   :value.sync="show2"
+                   :params="otherParams"></my-upload>
+    </div>
+</div>
+
+    <!--footer-->
+    <div th:replace="~{/fragments/footer::footer}"></div>
+</body>
+
+</html>

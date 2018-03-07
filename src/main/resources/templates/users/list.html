@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head::head}">
+	<meta charset="UTF-8" />
+	<title>Title</title>
+</head>
+<body>
+	<!--header-->
+	<div th:replace="~{fragments/header::header}"></div>
+	<!--content-->
+    <div id="mainContainer" class="container main">
+        <a class="ui primary button" href="/users/add" th:href="@{/users/add}">添加</a>
+		<div id="mainContainerRepleace" class="row">
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th data-field="id">ID</th>
+					<th data-field="username">账号</th>
+					<th data-field="name">姓名</th>
+					<th data-field="email">邮箱</th>
+					<th data-field="authorities">角色</th>
+					<th data-field="operation">操作</th>
+
+				</tr>
+				</thead>
+				<tbody>
+
+				<tr th:each="user : ${userModel.userList}">
+					<td th:text="${user.id}"></td>
+					<td th:text="${user.username}"></td>
+					<td th:text="${user.name}"></td>
+					<td th:text="${user.email}"></td>
+					<td th:text="${user.authorities}"></td>
+					<td>
+						<div>
+							<a th:href="@{'/users/edit/'+${user.id}}">
+                                编辑
+                            </a>
+                            <a class="blog-delete-user" role="button"
+									data-th-attr="userId=${user.id}">
+                                删除
+                            </a>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!--footer-->
+	<div th:replace="~{/fragments/footer::footer}"></div>
+    <!-- JavaScript -->
+    <script src="../../js/users/main.js" th:src="@{/js/users/main.js}"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html>
+        <head>
+            <title>uploadimg.html</title>
+
+            <meta name="keywords" content="keyword1,keyword2,keyword3"></meta>
+            <meta name="description" content="this is my page"></meta>
+            <meta name="content-type" content="text/html; charset=UTF-8"></meta>
+
+        </head>
+
+<body>
+<form enctype="multipart/form-data" th:action="@{/testuploadimg}" method="post" action="/testuploadimg">
+    图片<input type="file" name="file"/>
+    <input type="submit" value="上传"/>
+</form>
+<form method="post" th:action="@{/imageupload}" action="/imageupload">
+    <input type="submit" value="ceshi"/>
+</form>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

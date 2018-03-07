@@ -1,0 +1,39 @@
+.center {
+	text-align: center;
+}
+
+body {
+	background-color: #FFFFFF;
+}
+
+.ui.menu .item img.logo {
+	margin-right: 1.5em;
+}
+
+.main.container {
+	margin-top: 7em;
+}
+
+.wireframe {
+	margin-top: 2em;
+}
+
+.ui.footer.segment {
+	margin: 5em 0em 0em;
+	padding: 5em 0em;
+}
+
+.pic {width:100px; height:100px}
+
+.article {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+
+
+.divCenter{
+    text-align: center;position: relative;top: 30%;transform: translateY(-50%);
+}

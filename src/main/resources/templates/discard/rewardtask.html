@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head th:replace="~{fragments/head::head}">
+		<!-- Standard Meta -->
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<!-- Site Properties -->
+		<title>悬赏任务</title>
+
+		<link rel="stylesheet" href="css/semantic.min.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+
+        <!--header-->
+        <div th:replace="~{fragments/header::header}"></div>
+
+        <!--content-->
+		<div class="main container ui">
+            <div class="ui card center" style="margin-top: 10%;margin-left: 25%;margin-right: 25%;margin-bottom: 10%;width: 50%">
+                <div class="content">
+                    <div class="header">悬赏任务</div>
+                </div>
+                <div class="content">
+
+                    <form class="ui form segment">
+                        <div class="field">
+                            <label>文档标题</label>
+                            <input placeholder="请输入标题" name="title" type="text">
+                        </div>
+                        <div class="field">
+                            <label>所属类型</label>
+                            <select name="type" class="ui fluid dropdown">
+                                <option value="">请选择类型</option>
+                                <option value="math">数学</option>
+                                <option value="other">英语</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>悬赏天数</label>
+                            <input placeholder="请输入悬赏天数" name="rewardDay" type="text">
+                        </div>
+                        <div class="field">
+                            <label>赏金</label>
+                            <input placeholder="请输入赏金(积分)" name="moneyReward" type="text">
+                        </div>
+
+                        <div class="ui primary submit button">提交</div>
+                        <div class="ui reset button">重置</div>
+                        <div class="ui clear button">清空</div>
+                    </form>
+                </div>
+            </div>
+		</div>
+
+		<!--footer-->
+		<div th:replace="~{/fragments/footer::footer}"></div>
+	</body>
+
+</html>
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/semantic.min.js" charset="utf-8"></script>
+<script>
+	$(document)
+		.ready(function() {
+			$('.ui.form')
+				.form({
+					inline: true,
+					on: 'blur',
+					fields: {
+						title: {
+							identifier: 'title',
+							rules: [{
+								type: 'empty',
+								prompt: '请输入文档标题'
+							}]
+						},
+						type: {
+							identifier: 'type',
+							rules: [{
+								type: 'empty',
+								prompt: '请选择一个类型'
+							}]
+						},
+						rewardDay: {
+							identifier: 'rewardDay',
+							rules: [{
+								type: 'empty',
+								prompt: '请选择悬赏天数'
+							}]
+						},
+						moneyReward: {
+							identifier: 'moneyReward',
+							rules: [{
+								type: 'empty',
+								prompt: '请输入赏金'
+							}]
+						},
+					}
+				});
+		});
+</script>

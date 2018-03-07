@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="~{fragments/head::head}">
+		<meta charset="utf-8">
+		<title>用户主页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	</head>
+    <style media="screen">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #app {
+            position: relative;
+            text-align: center;
+        }
+
+        .wrap {
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            display: block;
+            margin: 30px auto 10px auto;
+            width: 120px;
+            height: 40px;
+            font-size: 14px;
+            line-height: 40px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+
+        .avatar {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+        }
+    </style>
+	<body id="app">
+        <!--header-->
+        <div th:replace="~{fragments/header::header}"></div>
+        <!--content-->
+        <div class="ui main container">
+            <div class="fly-home" >
+                <img id="avatarImg" v-if="!avatarUrl2" th:src="${user.avatar}" alt="名称">
+                <img class="avatar" v-if="avatarUrl2" :src="avatarUrl2" v-show="true" style="display: none;">
+                <i class="iconfont icon-renzheng" title="认证"></i>
+                <div class="item">
+                    <a class="btn" @click="toggleShow2">设置头像</a>
+                    <!--url="http://localhost:8080/uploadavatar"
+                    field="avatar2"-->
+                    <!--<img class="avatar" v-if="avatarUrl2" :src="avatarUrl2" v-show="true" style="display: none;">-->
+                    <my-upload
+                                url="http://www.dengyouquan.cn:8083/upload"
+                               field="file"
+                               key="0"
+                               lang-type="en"
+                               :value.sync="show2"
+                               :params="otherParams"></my-upload>
+                </div>
+                <h1>
+                    <span th:text="${user.name}"></span>
+                    <i class="iconfont icon-nan"></i>
+                    <i class="layui-badge fly-badge-vip">VIP5</i>
+                </h1>
+
+                <p class="fly-home-info">
+                    <i class="iconfont icon-zan" title="赞"></i><span style="color: #FF7200;">66666 赞</span>
+                    <i class="iconfont icon-shijian"></i><span><span th:text="${#dates.format(user.createdAt, 'yyyy-MM-dd')}"></span> 加入</span>
+                    <i class="iconfont icon-chengshi"></i><span>来自杭州</span>
+                </p>
+
+                <p class="fly-home-sign">（人生仿若一场修行）</p>
+
+                <div class="fly-sns" data-user="">
+                    <a href="javascript:;" class="layui-btn layui-btn-primary fly-imActive" data-type="addFriend">加为好友</a>
+                    <a href="javascript:;" class="layui-btn layui-btn-normal fly-imActive" data-type="chat">发起会话</a>
+                </div>
+
+            </div>
+        </div>
+		<!--footer-->
+		<div th:replace="~{/fragments/footer::footer}"></div>
+        <!-- cropAvatar -->
+        <script src="../../js/demo-src.js" th:src="@{/js/demo-src.js}"></script>
+	</body>
+
+</html>

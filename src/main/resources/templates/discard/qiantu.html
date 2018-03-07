@@ -1,0 +1,924 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<title>千图网-作品下载</title>
+		<meta name="referrer" content="always" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="//icon.qiantucdn.com/js/showfu/css/download_v133.min.css?v1" />
+		<link rel="stylesheet" type="text/css" href="//icon.qiantucdn.com/css/model-com.css?v1" />
+		<link rel="stylesheet" type="text/css" href="//icon.qiantucdn.com/58pic_home/index/css/qt-ui.css?v21501814807870" />
+		<link rel="stylesheet" type="text/css" href="//icon.qiantucdn.com/js/showfu/css/download.css?v2.0" />
+		<link rel="stylesheet" type="text/css" href="//icon.qiantucdn.com/css/login/login_v714.css" />
+	</head>
+	<style>
+		.geetest_holder {
+			width: 100%!important;
+		}
+		
+		.login-count {
+			width: 546px;
+			height: 380px;
+			background: #fff;
+			font-family: "微软雅黑;";
+			position: absolute;
+			z-index: 999999999;
+			top: 20%;
+			left: 30%;
+			-moz-box-shadow: 2px 2px 10px #666;
+			-webkit-box-shadow: 2px 2px 10px #666;
+			box-shadow: 2px 2px 10px #666;
+		}
+		
+		.login-count .prompt-title {
+			background-color: rgb(250, 250, 250);
+			font-family: "微软雅黑";
+			font-size: 20px;
+			height: 45px;
+			line-height: 45px;
+			width: 100%;
+			border-bottom: 1px solid rgb(235, 235, 235);
+			overflow: hidden;
+		}
+		
+		.login-count .prompt-title .prompt-text {
+			float: left;
+			display: inline;
+			margin-left: 20px;
+		}
+		
+		.login-count .prompt-box .prompted {
+			font-size: 18px;
+			font-family: "微软雅黑";
+			text-align: center;
+			line-height: 35px;
+			margin-top: 15px;
+		}
+		
+		.e_warp_tip {
+			width: 120px;
+			text-align: right;
+			display: inline-block;
+			font-size: 16px;
+			color: #000;
+		}
+		
+		.e_warp input {
+			height: 46px;
+			font-family: "微软雅黑";
+			font-size: 14px;
+			padding-left: 5px;
+			outline: none;
+			border: 2px solid #56BB4D;
+		}
+		
+		#email {
+			width: 274px;
+		}
+		
+		.e_warp {
+			margin-top: 20px;
+		}
+		
+		.ext {
+			font-size: 16px;
+			color: #000;
+			margin-left: 10px;
+		}
+		
+		.e_submit {
+			margin: 20px 0 0 120px;
+			width: 100px;
+			height: 40px;
+			background: #52BA49;
+			color: white;
+			line-height: 40px;
+			text-align: center;
+			cursor: pointer;
+			float: left;
+		}
+		
+		.e_warp .e_getemail {
+			color: #FC8E3A;
+			text-decoration: underline;
+			font-size: 14px;
+			cursor: pointer;
+			margin-left: 20px;
+		}
+		
+		.e_notice {
+			color: red;
+			float: left;
+			font-size: 16px;
+			height: 40px;
+			line-height: 40px;
+			margin-left: 20px;
+			margin-top: 20px;
+		}
+		
+		.header-bg {
+			background: #FFF5DA;
+			height: 40px;
+			width: 100%;
+			display: none;
+		}
+		
+		.header-text {
+			margin: 0 auto;
+			line-height: 40px;
+			width: 735px;
+			font-size: 15px;
+			font-family: '微软雅黑';
+			position: relative;
+			text-align: center;
+		}
+		
+		.j-top-no {
+			color: gray;
+			font-size: 14px;
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+		
+		.text-blue {
+			color: deepskyblue;
+		}
+		
+		.upload-btn {
+			display: inline-block;
+			*display: inline;
+			_zoom: 1;
+			font-weight: 600;
+			margin-top: 10px;
+			margin-left: 15px;
+			font-size: 16px;
+			background-color: #2BA715;
+			padding: 5px 5px 5px 5px;
+			color: white;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+		
+		a:hover {
+			text-decoration: none;
+		}
+		
+		#report_reason {
+			display: initial;
+			border: 0;
+			line-height: 2;
+			color: #333;
+			margin: 0;
+			font-size: 12px;
+		}
+		
+		.qt-card .card-img {
+			min-height: 100px;
+		}
+		
+		.card-handle {
+			display: none;
+		}
+		
+		.card-bg {
+			display: none;
+		}
+		
+		.download-box .title a:hover {
+			color: #10c55b;
+		}
+		
+		.inform-success {
+			width: 250px;
+			height: 150px;
+			text-align: center;
+			margin: -250px auto 0;
+			border-radius: 4px;
+			padding: 30px 40px;
+			background-color: #fff;
+			font-size: 14px;
+			position: relative;
+		}
+		
+		.inform-success .icon-ok {
+			margin: 0 auto 15px;
+			width: 53px;
+			height: 53px;
+			background: url(http://icon.qiantucdn.com/js/showfu/images/downloadDetails.png) -2px -190px no-repeat
+		}
+		
+		.inform-success h2 {
+			color: #666;
+		}
+		
+		.login-close {
+			display: none;
+		}
+		
+		.qt-header-right .user-info .info-vip .QY-c1,
+		.qt-header-right .user-info .info-vip .QY-c2,
+		.qt-header-right .user-info .info-vip .QY-c3 {
+			background: url("http://icon.58pic.com/static/images/companyVip/company-all.png") no-repeat;
+			width: 18px;
+			height: 18px;
+			margin-top: -5px;
+		}
+		
+		.qt-header-right .user-info .info-vip .QY-c1 {
+			background-position: -84px 0;
+		}
+		
+		.qt-header-right .user-info .info-vip .QY-c2 {
+			background-position: -106px 0;
+		}
+		
+		.qt-header-right .user-info .info-vip .QY-c3 {
+			background-position: -127px 0;
+		}
+		
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY0 .icon,
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY1 .icon,
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY2 .icon,
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY3 .icon {
+			background: url("http://icon.58pic.com/static/images/companyVip/company-all.png") no-repeat;
+			height: 26px;
+		}
+		
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY0 .icon-vip {
+			background-position: -1px -146px;
+		}
+		
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY1 .icon-vip {
+			background-position: -31px -146px;
+		}
+		
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY2 .icon-vip {
+			background-position: -60px -146px;
+		}
+		
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY3 .icon-vip {
+			background-position: -90px -146px;
+		}
+		
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY0 .btn-vip,
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY1 .btn-vip,
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY2 .btn-vip,
+		.qt-header-right .user-box .down-box.down-info .vip-linear.isQY3 .btn-vip {
+			background-color: #e8e4df;
+		}
+	</style>
+	<script type="text/javascript">
+		var now = new Date();
+		var beginTime = now.getTime();
+		var kw = '多种学科图标';
+	</script>
+	<script>
+		var stime = "1512908844";
+		setInterval(function() {
+			stime++;
+		}, 1000);
+	</script>
+
+	<body>
+		<div class="qt-header-other">
+			<div class="w1200">
+				<div class="qt-logo">
+					<a href="http://www.58pic.com" title="千图网"></a>
+				</div>
+				<div class="header-title">作品下载</div>
+				<div class="qt-header-right fr" style="margin-top: 12px">
+					<div class="login-before" style="display:none;">
+						<a href="http://www.58pic.com/login" class="qt-btn btn-green">请登录</a>
+						<a href="http://www.58pic.com/enroll">免费注册</a>
+					</div>
+					<div class="login-after" style="display:none;">
+						<div class="user-box">
+							<div class="user-img"><img src="http://icon.58pic.com/images/user/user-default.png" width="28" height="28" alt=""></div>
+							<div class="user-info">
+								<div class="clearfix">
+									<p class="info-name fl "></p>
+									<p class="info-vip fl "><i class="YC-c" style="display:none;"></i><i class="GX-c" style="display:none;"></i><i class="BG-c" style="display:none;"></i><i class="QY-c1" style="display:none;"></i><i class="QY-c2" style="display:none;"></i><i class="QY-c3" style="display:none;"></i></p>
+								</div>
+								<p class="u-info-id"></p>
+							</div>
+							<div class="down-box down-info">
+								<div class="info-down">
+									<p class="clearfix user-handle">
+										<a href="http://www.58pic.com/user/" class="fl text-green btn-user" title="个人中心" target="_blank">进入个人中心</a>
+										<a href="http://www.58pic.com/index.php?m=login&a=logout" class="fr btn-exit" title="退出" target="_blank" rel="nofollow"><i class="icon icon-exit"></i> 退出
+										</a>
+									</p>
+									<p class="vip-linear"><i class="icon icon-vip"></i><span class="qy_stOne" style="display:none;">
+                                            企业VIP: 您不具有下载权限
+                                        </span><span class="qy_stTwo" style="display:none;">
+                                            企业VIP：
+                                            <em class="text-green">YY-MM-DD</em>
+                                            到期
+                                            <a href="http://www.58pic.com/index.php?m=companyVip&a=index&f=2" target="_blank" class="btn-vip">立即续费</a></span><span class="qy_stThree" style="display:none;">
+                                            企业VIP：900万素材下载
+                                            <a href="http://www.58pic.com/introduce/" target="_blank" class="btn-vip">开通VIP</a></span></p>
+									<p class="vip-linear isYC"><i class="icon icon-vip"></i><span class="yc_stOne" style="display:none;">
+                                            原创VIP终生会员，千图网感谢您的支持 ！
+                                        </span><span class="yc_stTwo" style="display:none;">
+                                            原创VIP：
+                                            <em class="text-green">YY-MM-DD</em>
+                                            到期
+                                            <a href="http://www.58pic.com/index.php?m=sponsor&a=indexnew&f=4&t=2" target="_blank" class="btn-vip">立即续费</a></span><span class="yc_stThree" style="display:none;">
+                                            原创VIP：180万高质量原创作品
+                                            <a href="http://www.58pic.com/index.php?m=sponsor&a=indexnew&f=4&t=2" target="_blank" class="btn-vip">开通VIP</a></span></p>
+									<p class="vip-linear isBG"><i class="icon icon-vip"></i><span class="bg_stOne" style="display:none;">
+                                            办公VIP终生会员，千图网感谢您的支持 ！
+                                        </span><span class="bg_stTwo" style="display:none;">
+                                            办公VIP：
+                                            <em class="text-green">YY-MM-DD</em>
+                                            到期
+                                            <a href="http://www.58pic.com/index.php?m=sponsor&a=officeVip" target="_blank" class="btn-vip">立即续费</a></span><span class="bg_stThree" style="display:none;">
+                                            办公VIP：200万简历、PPT模板
+                                            <a href="http://www.58pic.com/index.php?m=sponsor&a=officeVip" target="_blank" class="btn-vip">开通VIP</a></span></p>
+									<p class="vip-linear isGX"><i class="icon icon-vip"></i><span class="sj_stOne" style="display:none;">
+                                            共享VIP终生会员，千图网感谢您的支持 ！
+                                        </span><span class="sj_stTwo" style="display:none;">
+                                            共享VIP：
+                                            <em class="text-green">YY-MM-DD</em>
+                                            到期
+                                            <a href="http://www.58pic.com/index.php?m=sponsor&a=indexnew&f=4&t=1" target="_blank" class="btn-vip">立即续费</a></span><span class="sj_stThree" style="display:none;">
+                                            共享VIP：800万严选共享作品
+                                            <a href="http://www.58pic.com/index.php?m=sponsor&a=indexnew&f=4&t=1" target="_blank" class="btn-vip">开通VIP</a></span></p>
+									<p class="info-nav">
+										<a href="http://upload.58pic.com" class="nav-list" title="上传作品" target="_blank" rel="nofollow"><i class="icon icon-upload"></i> 作品上传
+										</a>
+										<a href="http://www.58pic.com/index.php?m=user&a=qtbRecord" class="nav-list" title="我的千图积分" target="_blank" rel="nofollow"><i class="icon icon-coin"></i> 我的千图积分
+										</a>
+										<a href="http://www.58pic.com/index.php?m=user&a=home" class="nav-list" title="我的主页" target="_blank" rel="nofollow"><i class="icon icon-home"></i> 我的主页
+										</a>
+										<a href="http://www.58pic.com/index.php?m=user&a=userFav" class="nav-list" title="我的收藏" target="_blank" rel="nofollow"><i class="icon icon-heart"></i> 我的收藏
+										</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="w1200 download-main-details
+
+        isGX        clearfix">
+			<div class="fl img-box">
+				<div class="img" style="height:auto;max-height:200px;">
+					<a href="http://www.58pic.com/newpic/14722424.html"><img src="http://pic.qiantucdn.com/58pic/14/72/24/24W58PICGB3.jpg" width="250" alt=""></a>
+				</div>
+				<div class="img-info">
+					<p>格式：png
+						<a href="javascript:;" class="inform jubao clickRecord" attr-type="a4">举报</a>
+					</p>
+					<p>大小：0KB</p>
+				</div>
+			</div>
+			<script>
+				document.ready = function() {
+					$('.login-model').fadeIn(200);
+					$('.model-content').hide().parent().find('.j-default').show();
+					$('.qt-model .model-close').hide();
+				}
+			</script>
+			<div class="delay-notice" style="display: none;">温馨提示：您已等待1分钟，推荐使用
+				<a href="http://www.58pic.com/index.php?m=user&a=sponsor&f=33" target="_blank">VIP 10M/S加速下载</a>，节省您的时间。
+				<a href="http://www.58pic.com/index.php?m=user&a=sponsor&f=33" target="_blank">点此查看详情</a>
+			</div>
+			<div class="fl download-box"></div>
+		</div>
+		<div class="w1200 download-ad">
+			<a attr-type="b1" class="clickRecord" href="http://www.58pic.com/index.php?m=user&a=sponsor&f=1" target="_blank"><img src="http://icon.qiantucdn.com/images/download/gx-ad.png" alt="办公VIP" width="1200" height="136"></a>
+		</div>
+		<div class="w1200 download-help">
+			如需帮助，请联系企业QQ: 4009987011 企业电话: 400-998-7011
+		</div>
+		<!--下载等待页内容  start-->
+		<div class="w1200 download-masonry" style='display: none;'></div>
+		<!--下载等待页内容 end-->
+		<div class="qt-footer-other">
+			Copyright &copy; 2017千图网 沪ICP备10011451号-6 用时： 0.0022
+			<span id="exectime"></span></div>
+		<div class="qt-model-t">
+			<div class="mdoel-table">
+				<div class="model-table-call">
+					<div class="inform-success">
+						<a href="javascript:;" class="model-table-close">&times;</a>
+						<div class="icon-ok"></div>
+						<h2>举报成功！ 3秒后自动关闭</h2></div>
+				</div>
+			</div>
+		</div>
+		<div class="qt-model model-inform">
+			<div class="qt-model-bg"></div>
+			<div class="model-content">
+				<a href="javascript:;" class="model-close" rel="external nofollow">×</a>
+				<div class="content-title">请说明举报理由</div>
+				<form>
+					<p class="radio-inline"><input type="radio" name="reason" id="req1" value="14"><label for="req1" data-inform="1" class='rq14'>源文件为合层文件</label></p>
+					<p class="radio-inline"><input type="radio" name="reason" id="req2" value="15"><label for="req2" data-inform="2" class='rq15'>素材重复/网站已存在同样内容</label></p>
+					<p class="radio-inline"><input type="radio" name="reason" id="req3" value="16"><label for="req3" data-inform="3" class='rq16'>格式不符/错误</label></p>
+					<p class="radio-inline"><input type="radio" name="reason" id="req4" value="17"><label for="req4" data-inform="4" class='rq17'>压缩包出错/解压失败</label></p>
+					<p class="radio-inline"><input type="radio" name="reason" id="req5" value="18"><label for="req5" data-inform="5" class='rq18'>文件损坏/文件空白/打不开</label></p>
+					<p class="radio-inline"><input type="radio" name="reason" id="req6" value="19"><label for="req6" data-inform="6" class='rq19'>预览图与源文件不符</label></p>
+					<p class="radio-inline"><input type="radio" name="reason" id="req7" value="20"><label for="req7" data-inform="7" class='rq20'>倒计时结束时无下载/网页丢失/404报错</label></p>
+					<p class="radio-inline"><input type="radio" name="reason" id="req8" value="21"><label for="req8" data-inform="8" class='rq21'>盗版/侵权</label></p>
+					<div class="inform-upload">
+						<div class="model-btn btn-orange-linear">
+							<a href="javascript:;" onclick="$('#error_img').click();"><i class="upload-icon"></i>上传图片
+							</a>
+						</div>
+						<p class="upload-location"><span id="upload-url"></span></p><input id='error_img' type='file' style='display:none;' onchange="uploadErrorImg(this)" /></div>
+					<div class="inform-des"><textarea placeholder="请在这里输入举报内容描述哦~" id='report_reason'></textarea></div><input type="hidden" value="14722424" class="hideId" />
+					<div class="model-btn btn-green-linear subm">
+						<a href="javascript:;">确认</a>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="qt-model model-error">
+			<div class="qt-model-bg"></div>
+			<div class="model-content">
+				<a href="javascript:;" class="model-close" rel="external nofollow">×</a>
+				<div class="content-title">异常状态</div>
+				<p class="content-text">当日限额用户/VIP失效/网络断开，倒计时结束后未开始
+					<br> 下载/网页丢失/404报错
+				</p>
+				<div class="content-footer">
+					<div class="model-btn btn-green-linear">
+						<a href="javascript:;">确认</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--弹窗-->
+		<div class="xyyh">
+			<ul class="xyyh-ul1"></ul>
+			<ul class="xyyh-ul2">
+				<a class="xyyh-a1" target="_black" href="https://huke88.com/?sr=popup&sem=qiantu&kw=200780"></a>
+				<a class="xyyh-a2" onclick="$(this).parent().parent().css('display','none')"></a>
+			</ul>
+		</div>
+		<!--ppt用户问卷调查-->
+		<!---->
+		<!--<div class="qt-model-t">-->
+		<!---->
+		<!--<div class="mdoel-table">-->
+		<!--<div class="model-table-call">-->
+		<!--<div class="ppt-survey">-->
+		<!--<a href="javascript:;" class="model-table-close" rel="nofollow">×</a>-->
+		<!--<div class="tag-wrap">-->
+		<!--<img src="http://icon.qiantucdn.com/images/download/book.png" alt="">-->
+		<!--</div>-->
+		<!--<h2>问卷调查</h2>-->
+		<!--<p class="text-alert">感谢您使用千图网！-->
+		<!--<br>为了向您提供更好的用户体验，诚邀您参加本次问卷调查。-->
+		<!--</p>-->
+		<!--<p class="qt-btn btn-green-linear" id="click_jump">-->
+		<!--<a href="https://www.wjx.cn/jq/17002047.aspx" rel="nofollow" target="_black">进入问卷</a>-->
+		<!--</p>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--</div>--><input type="hidden" value="" id='h_size' /><input type="hidden" value="14722424" id='h_id' /><input type="hidden" value="145" id="kid" /><input type="hidden" value="" id="bigclassid" /><input type="hidden" value="" id="upUserId" /><input type="hidden" value="0" id="pictype" /><input type="hidden" value="" id="pichid" /><input type="hidden" value="" id="loginuid" /><input type="hidden" value="0" id="vipflag" /><input type="hidden" value="17510" id="regdays" /><input type="hidden" value="" id="isshow" /><input type="hidden" value="0" id="isvip" />
+		<script type="text/javascript" src="//icon.qiantucdn.com/js/gee/gt.js"></script>
+		<div class="qt-model-t login-model" style="display:none;">
+			<div class="mdoel-table">
+				<div class="model-table-call">
+					<div class="login-wrap">
+						<div class="login-hearder">
+							<div class="login-close" onclick="$('.login-model').css('display', 'none')"></div> 登录千图网
+						</div>
+						<div class="login-content">
+							<div class="login-others">
+								<a href="http://www.58pic.com/index.php?m=login&a=snsLogin&type=qq" class="other-logo logo-qq"><i></i>&nbsp;
+									<span>QQ登录</span></a>
+								<a href="http://www.58pic.com/index.php?m=login&a=snsLogin&type=weixin" class="other-logo logo-wechat"><i></i>&nbsp;
+									<span>微信登录</span></a>
+								<a href="http://www.58pic.com/index.php?m=login&a=snsLogin&type=sina" class="other-logo logo-weibo"><i></i>&nbsp;
+									<span>微博登录</span></a>
+							</div>
+							<div class="login-box">
+								<p class="cutting-line"><span>或</span></p>
+								<div class="phone-box">
+									<div class="login-form">
+										<div class="input-inline">
+											<div class="input-icon i-phone"></div><input id="phone" maxlength="11" type="text" autocomplete="off" placeholder="请输入 11 位手机号" value="">
+											<p class="warning-text"><i class="danger-icon"></i><span>该帐号还未注册，<a href="#" class="text-green">去注册</a></span></p>
+										</div>
+										<div id="sendcode-captcha" class="input-inline captcha"><input id="img-code" type="text" autocomplete="off" placeholder="图形验证码" value="" maxlength="6" style="width: 188px;" /><img alt="加载中..." id="img-captcha" src="" style="margin-left: 10px;vertical-align: bottom; cursor:pointer;" />
+											<a onclick="$('#img-captcha').click();" style="display:inline-block;width:20px;height:20px;vertical-align:middle;margin-left: 8px;cursor: pointer;background-image:url('http://icon.58pic.com/revision/images/img-code-bg.png');"></a>
+											<p class="warning-text"></p>
+										</div>
+										<div class="input-inline captcha"><input id="captcha" type="text" maxlength="6" autocomplete="off" placeholder="请输入验证码">
+											<div class="btn-captcha qt-btn btn-green">
+												<a href="javascript:void(0);">发送验证码</a>
+											</div>
+											<p class="warning-text"><i class="danger-icon"></i><span>该帐号还未注册，<a href="#" class="text-green">去注册</a></span></p>
+										</div>
+										<div class="login-submit qt-btn btn-green-linear disabled" id="submit-phone">
+											<a href="#">登录</a>
+										</div>
+										<p class="login-switch">
+											<a href="#" class="j-accountLogin fl">帐号密码登录</a>
+											<a href="http://www.58pic.com/enroll" class="fr">立即注册</a>
+										</p>
+									</div>
+								</div>
+								<div class="account-box">
+									<div class="login-form">
+										<div class="input-inline">
+											<div class="input-icon i-user"></div><input id="account" type="text" autocomplete="off" placeholder="请输入帐号/手机号">
+											<p class="warning-text"></p>
+										</div>
+										<div class="input-inline">
+											<div class="input-icon i-password"></div><input id="passwd" type="password" autocomplete="off" placeholder="请输入密码">
+											<p class="warning-text"></p>
+										</div>
+										<div class="input-inline captcha account-captcha" style="display:none;"><input id="img-code2" type="text" autocomplete="off" placeholder="图形验证码" value="" maxlength="6" style="width: 188px;" /><img alt="加载中..." id="img-captcha2" src="" style="margin-left: 10px;vertical-align: bottom; cursor:pointer;" />
+											<a onclick="$('#img-captcha2').click();" style="display:inline-block;width:20px;height:20px;vertical-align:middle;margin-left: 8px;cursor: pointer;background-image:url('http://icon.58pic.com/revision/images/img-code-bg.png');"></a>
+											<p class="warning-text"></p>
+										</div>
+										<div class="login-submit qt-btn btn-green-linear disabled" id="submit-passwd">
+											<a href="#">登录</a>
+										</div>
+										<p class="login-switch clearfix">
+											<a href="#" class="fl j-phoneLogin">手机验证码登录</a>
+											<a href="http://www.58pic.com/reset" class="fr">忘记密码？</a>
+											<a href="http://www.58pic.com/enroll">立即注册</a>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="login-footer">
+								<p class="login-type">
+									<a href="javascript:;" class="j-phoneLogin" rel="external nofollow">手机验证码登录</a>
+									<a href="javascript:;" class="j-accountLogin" rel="external nofollow">帐号密码登录</a>
+								</p>
+								<p class="login-p">
+									<a href="http://www.58pic.com/enroll">立即注册</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="//icon.qiantucdn.com/js/showfu/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="//icon.qiantucdn.com/revision/js/ssl_loginReg_v0802.js?v5"></script>
+		</present>
+		<script type="text/javascript" src="//icon.qiantucdn.com/js/showfu/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="//icon.qiantucdn.com/js/showfu/js/Masonry.js"></script>
+		<script type="text/javascript" src="//icon.qiantucdn.com/js/ssl_commons_v9.js?v12"></script>
+		<script type="text/javascript" src="//icon.qiantucdn.com/js/showfu/ssl_aV2.js?v18"></script>
+		<script>
+			var start;
+			start = new Date();
+			//退出
+			endtype = 'exit';
+			if(window.document.referrer == '') {
+				//跳出
+				endtype = 'jump';
+			}
+
+			function checkURL(URL) {
+				var str = URL;
+				var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+				var objExp = new RegExp(Expression);
+				if(objExp.test(str) == true) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			function is58pic(URL) {
+				if(URL.indexOf("58pic.com") > 0) {
+					if(URL.indexOf("href") > 0) {
+						return false;
+					} else {
+						return true;
+					}
+				} else {
+					return false;
+				}
+			}
+
+			function endtimecheck(start, endtype) {
+				var end;
+				var duration = 0;
+				end = new Date(); //用户退出时间
+				duration = end.getTime() - start.getTime();
+				duration = duration / 1000; //取的是秒
+				$.getJSON('https://ajax.58pic.com/58pic/index.php?m=tongji&a=newcount&from=download&type=endtime&time=' + duration + '&endtype=' + endtype + '&callback=?', function(data) {});
+			}
+			$(window).unload(function() {
+				endtimecheck(start, endtype);
+			});
+			$(document).on("click", "a", function() {
+				var href = $(this).attr('href');
+				if(checkURL(href)) {
+					if(!is58pic(href)) {
+						//算作退出
+						endtimecheck(start, endtype);
+					}
+				}
+			});
+
+			$(function() {
+				$('.masonry-box').masonry({
+					itemSelector: '.masonry-item',
+					columnWidth: 300
+				});
+				$(".qt-model").on("click", ".model-close", function() {
+					$(this).closest(".qt-model").fadeOut(200);
+				})
+				$(".download-main-details .jubao").on("click", function() {
+					$(".model-inform.qt-model").fadeIn(200);
+				})
+			})
+			// console.log(beginTime);
+			window.onload = function() {
+				var errorWord = "";
+				if(errorWord == "下载过于频繁，需要验证") {
+					$('#btn-continue').click(function() {
+						var dl_limit_code = $("#dl_limit_code").val();
+						if(!dl_limit_code) {
+							art.dialog({
+								title: '',
+								time: 1.2,
+								icon: 'error',
+								lock: 'true',
+								content: '请先输入验证码',
+								opacity: 0.4
+							});
+							return false;
+						}
+						$.ajax({
+							type: 'GET',
+							url: '/index.php?m=miscDownload&a=verifyDlLimitCode&dl_limit_code=' + dl_limit_code + '&id= 14722424',
+							dataType: 'json',
+							success: function(ret) {
+								if(ret.status == 1) {
+									window.location.reload();
+								} else {
+									art.dialog({
+										title: '',
+										time: 1.2,
+										icon: 'error',
+										lock: 'true',
+										content: '回答错误! 请重新输入',
+										opacity: 0.4
+									});
+									return false;
+									//                                setTimeout('window.location.reload()', 1000);
+								}
+							}
+						});
+					});
+				}
+				var endT = new Date();
+				var endTime = endT.getTime();
+				var execTime = (endTime - beginTime) / 1000;
+				$("#exectime").html(" " + execTime + " 秒");
+				var type = 5;
+				// 2014年9月3日11:44:38修改
+				var tp_cost_time = 0.0022;
+				var sc = '0';
+				$.getJSON("https://ajax.58pic.com/58pic/index.php?m=ajax&a=page_cost&exec_time=" + execTime + "&type=" + type + "&tp_cost_time=" + tp_cost_time + "&servc=" + sc + "&callback=?", function(e) {});
+
+				$('.clickRecord').click(function() {
+					var type = $(this).attr('attr-type');
+					var kid = $('#kid').val();
+					$.getJSON("https://ajax.58pic.com/58pic/index.php?m=tongji&a=count&from=detail&type=" + type + "&callback=?", function(e) {});
+				});
+
+				function setCookie(name, value) {
+					var Days = 24;
+					var exp = new Date();
+					exp.setTime(exp.getTime() + Days * 60 * 60 * 1000);
+					document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+				}
+				$(".xufei_click").click(function() {
+					var types = $(this).attr('data-types');
+					setCookie("down_vip_types", types);
+					$.getJSON("https://ajax.58pic.com/58pic/index.php?m=vipOverTime&a=downlimitVipType&types=" + types + "&callback=?", function(e) {});
+				})
+
+				// --弹窗事件:当前只限平面广告(did=2)
+				popup(1);
+
+				function popup(num) {
+					if(num) {
+						$(".btn-fast-down,.btn-thunder-down,.btn-default-down").click(function() {
+							var did = ;
+
+							$.ajax({
+								type: 'POST',
+								data: {
+									'did': did
+								},
+								url: "/index.php?m=show&a=ajaxHukePopupShow",
+								dataType: 'json',
+								success: function(ret) {
+									if(ret.show == 1) {
+										setTimeout(function() {
+											$('.xyyh').css('display', 'block');
+										}, 2000);
+									}
+								}
+							});
+
+						});
+					}
+					// 点击弹窗跳转:当前只限平面广告
+					$(".xyyh-a1").click(function() {
+						var did = ;
+						$('.xyyh').css('display', 'none');
+						$.getJSON("/index.php?m=show&a=ajaxHukePopupStatistics&did=" + did + "&type=jump", function(e) {});
+					});
+					// 点击弹窗关闭:当前只限平面广告
+					$(".xyyh-a2").click(function() {
+						var did = ;
+						$.getJSON("/index.php?m=show&a=ajaxHukePopupStatistics&did=" + did + "&type=close", function(e) {});
+					});
+				}
+
+				$(".btn-fast-down").click(function(e) {
+					$("#investigation").show();
+					e.stopPropagation();
+				});
+				$(".btn-thunder-down").click(function(e) {
+					$("#investigation").show();
+					e.stopPropagation();
+				});
+				$(".btn-default-down").click(function(e) {
+					$("#investigation").show();
+					e.stopPropagation();
+				});
+				// 点击隐藏事件
+				$("#click_jump, .model-table-close").on('click', function() {
+					$("#investigation").hide();
+				});
+				$(".ppt-survey").on('click', function(e) {
+					e.stopPropagation();
+				});
+				$('body').on('click', function() {
+					$("#investigation").hide();
+				});
+
+				var _hmt = _hmt || [];
+				(function() {
+					var hm = document.createElement("script");
+					hm.src = "//hm.baidu.com/hm.js?644763986e48f2374d9118a9ae189e14";
+					var s = document.getElementsByTagName("script")[0];
+					s.parentNode.insertBefore(hm, s);
+				})();
+				var countdown = 60;
+				dingshi = null;
+
+				function sendemail() {
+					var obj = $(".e_getemail");
+					settime(obj);
+				}
+
+				function settime(obj) { //发送验证码倒计时
+					if(countdown == 0) {
+						obj.attr('lock', 0);
+						obj.text("点击获取验证码");
+						countdown = 60;
+						return;
+					} else {
+						obj.attr('lock', 1);
+						obj.text("重新发送(" + countdown + ")");
+						countdown--;
+					}
+					dingshi = setTimeout(function() {
+						settime(obj)
+					}, 1000)
+				}
+				$('#no-email').click(function() {
+					location.href = "http://www.58pic.com/index.php?m=HelpCenter&a=index&qid=58";
+				});
+				//获取验证码
+				$('.e_getemail').click(function() {
+
+					var qq = $('#already_email').val();
+					if(!qq) {
+						qq = $('#email').val();
+					}
+					var type = $('#type').val();
+					if(RegExp(/^[1-9][0-9]{4,10}$/).test(qq)) {
+
+						if($(this).attr('lock') != 1) {
+							sendemail();
+							$('#already_email').val(qq);
+							$.ajax({
+								type: 'POST',
+								data: {
+									'qq': qq,
+									'type': type
+								},
+								url: '/index.php?m=verify&a=index',
+								dataType: 'json',
+								success: function(ret) {
+									switch(ret.code) {
+										case '200':
+											$('.e_notice').empty().text('发送成功');
+											clearnotice();
+											break;
+										case '-1':
+											$('.e_notice').empty().text('发送成功');
+											clearnotice();
+											break;
+										case '-2':
+											clearTimeout(dingshi);
+											$('.e_notice').empty().text('邮箱已被使用');
+											$('.e_getemail').text('点击发送').css('color', 'gray');
+											clearnotice();
+											break;
+										case '-3':
+											$('.e_notice').empty().text('发送失败，请重试');
+											clearnotice();
+											break;
+										case '-7':
+											$('.e_notice').empty().text('发送过于频繁，请在' + ret.message + 's后重试');
+											clearnotice();
+											break;
+										case '-8':
+											clearTimeout(dingshi);
+											$('.e_notice').empty().text('操作频繁，请1分钟之后尝试');
+											$('.e_getemail').text('请稍候..').css('color', 'gray');
+											clearnotice();
+											break;
+									}
+								}
+							});
+							return false;
+						}
+					} else {
+						$('.e_notice').empty().text('qq格式错误，请重新输入');
+						clearnotice();
+					}
+					return false;
+				});
+
+				// 提交验证吗
+				$('.e_submit').click(function() {
+					var qq = $('#already_email').val();
+					var code = $('#code').val();
+					if(RegExp(/^[1-9][0-9]{4,10}$/).test(qq) && RegExp(/^[0-9]{6}$/).test(code)) {
+						$.ajax({
+							type: 'POST',
+							data: {
+								'qq': qq,
+								'code': code
+							},
+							url: '/index.php?m=verify&a=verifyemail',
+							dataType: 'json',
+							success: function(ret) {
+								switch(ret.code) {
+									case '201':
+										$('.e_notice').empty().text('验证成功');
+										setTimeout(function() {
+											window.location.reload();
+										}, 1500);
+										break;
+									case '-1':
+										$('.e_notice').empty().text('请先登录');
+										clearnotice();
+										break;
+									case '-4':
+										$('.e_notice').empty().text('验证码不能为空');
+										clearnotice();
+										break;
+									case '-5':
+										$('.e_notice').empty().text('验证码不存在，请重新发送');
+										clearnotice();
+										break;
+									case '-6':
+										$('.e_notice').empty().text('验证码错误');
+										clearnotice();
+										break;
+								}
+							}
+						})
+					} else {
+						$('.e_notice').empty().text('邮箱或验证码错误');
+						clearnotice();
+					}
+				})
+			}
+
+			function clearnotice() {
+				setTimeout(function() {
+					$('.e_notice').empty();
+				}, 1500);
+			}
+		</script>
+	</body>
+
+</html>

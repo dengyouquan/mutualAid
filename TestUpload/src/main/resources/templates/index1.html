@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<!--header-->
+<div th:replace="~{fragments/header :: header}">...</div>
+
+<!--content-->
+<div class="main container ui">
+    <div class="ui card center" style="margin-top: 5%;margin-left: 10%;margin-right: 10%;margin-bottom: 10%;width: 80%">
+        <div class="content">
+            <div class="header">Mongo File Server</div>
+        </div>
+        <div th:if="${errorMsg}">
+            <h2 th:text="${errorMsg}"/>
+        </div>
+        <div class="content">
+            <table class="layui-hide" id="test" lay-filter="demo"></table>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<div>
+    <form method="POST" enctype="multipart/form-data" action="/">
+        <table>
+            <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+            <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+        </table>
+    </form>
+</div>
+<div>    
+    <table border="1">
+    <thead>
+    <tr>
+
+        <td>文件名称</td>
+        <td>文件ID</td>
+        <td>文件类型</td>
+        <td>文件大小</td>
+        <td>上传时间</td>
+        <td>md5值</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${files.size()} eq 0">
+        <td colspan="3">没有文件信息！！</td>
+    </tr>
+    <tr th:each="file : ${files}">
+        <td><a th:href="'files/'+${file.id}" th:text="${file.name}" /></td>
+        <td th:text="${file.id}" ></td>
+        <td th:text="${file.type}" ></td>
+        <td th:text="${file.size}" ></td>
+        <td th:text="${file.uploadDate}" ></td>
+        <td th:text="${file.md5}" ></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<div th:replace="~{fragments/footer :: footer}">...</div>
+
+<script type="text/javascript">
+    layui.use([ 'layer', 'table'], function(){
+        var layer = layui.layer //弹层
+            ,table = layui.table; //表格
+
+
+        var arr = [ //表头
+            {field: 'id', title: '文件ID', width:50, sort: true, fixed: 'left'}
+            ,{field: 'name', title: '文件名称', width:80}
+            ,{field: 'type', title: '文件类型', width:80}
+            ,{field: 'size', title: '文件大小', width:140, sort: true}
+            ,{field: 'updateDate', title: '上传时间', width: 80}
+            ,{field: 'md5', title: 'md5值', width: 80}
+            ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+        ];
+
+        //执行一个 table 实例
+        table.render({
+            elem: '#test'
+            ,height: 332
+            ,url: '/files' //数据接口
+            ,page: true //开启分页
+            ,cols: [arr]
+        });
+
+        //监听工具条
+        table.on('tool(demo)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent === 'detail'){
+                layer.msg('查看操作');
+            } else if(layEvent === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(index);
+                    //向服务端发送删除指令
+                });
+            } else if(layEvent === 'edit'){
+                layer.msg('编辑操作');
+            }
+        });
+    });
+</script>
+</body>
+</html>

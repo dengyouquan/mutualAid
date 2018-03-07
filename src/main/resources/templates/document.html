@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+	<head th:replace="~{fragments/head::head}">
+		<!-- Standard Meta -->
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- Site Properties -->
+		<title>互助平台</title>
+	</head>
+
+	<body>
+
+		<!--header-->
+		<div th:replace="~{fragments/header::header}"></div>
+		<!--content-->
+		<div class="ui main text container">
+			<!--<span>资料条目</span>
+			<div class="ui items">
+				<div class="item">
+					<div class="image">
+						<img src="images/empty.png">
+					</div>
+					<div class="content">
+						<a class="header">标题</a>
+						<div class="meta">
+							<span>Description</span>
+						</div>
+						<div class="description">
+							<p></p>
+						</div>
+						<div class="extra">Additional Details </div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="image">
+						<img src="images/empty.png">
+					</div>
+					<div class="content">
+						<a class="header">标题</a>
+						<div class="meta">
+							<span>Description</span>
+						</div>
+						<div class="description">
+							<p></p>
+						</div>
+						<div class="extra">Additional Details </div>
+					</div>
+				</div>
+			</div>
+			<br /><br />-->
+
+            <div th:if="${customCount}!=0" style="margin-bottom: 5%">
+                <div id="customContainer">
+                    <div id="customContainerSysc">
+                        <span id="customCount" th:text="${customCount}" hidden></span>
+                        <div class="item" th:each="document:${customDocuments}">
+                            <div class="image">
+                                <img src="images/empty.png" th:src="${document.cover}">
+                            </div>
+                            <div class="content">
+                                <a class="header" href="/documentdetail" th:href="@{'/documentdetail?did='+${document.id}}" th:text="${document.title}">标题</a>
+                                <div class="meta">
+                                    <span >描述</span>
+                                </div>
+                                <div class="description">
+                                    <p th:text="${document.description}"></p>
+                                </div>
+                                <div class="extra">Additional Details </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="customPage"></div>
+            </div>
+            <div th:if="${customCount}==0" style="margin-bottom: 5%">
+                <div>暂无任何数据！</div>
+            </div>
+		</div>
+		<!--footer-->
+		<div th:replace="~{/fragments/footer::footer}"></div>
+	</body>
+    <script type="text/javascript">
+        function getDocuments(pageIndex, pageSize,category,mode) {
+            $.ajax({
+                url: "/document",
+                contentType : 'application/json',
+                data:{
+                    "page":pageIndex,
+                    "limit":pageSize,
+                    "mode":mode,
+                    "category":category,
+                    "async":true
+                },
+                success: function(data){
+                    var str = "#"+mode+"Container";
+                    console.log(str);
+                    $(str).html(data);//局部刷新DIV
+                },
+                error : function() {
+                    toastr.error("error!");
+                }
+            });
+        }
+
+        layui.use(['laypage', 'layer'], function() {
+            var laypage = layui.laypage
+                ,$ = layui.jquery
+                ,layer = layui.layer;
+            //完整功能($()里面只能用''，不能用"")
+            var customCount = $('#customCount').text();
+            laypage.render({
+                elem: 'customPage'
+                ,count: customCount
+                ,limit:2
+                ,skip: true //开启跳页
+                ,skin: '#2F7111' //自定义选中色值
+                ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+                ,jump: function(obj,first){
+                    //首次不执行
+                    if(!first){
+                        //pageIndex, pageSize,category,mode
+                        getDocuments(obj.curr,2,null,"custom");
+                    }
+                }
+            });
+        });
+    </script>
+</html>
